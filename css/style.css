@@ -1,4 +1,191 @@
+:root {
+    --bg-top: #05070f;
+    --bg-bottom: #0d1230;
+    --accent: #cbd5ff;
+    --star: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html,
 body {
-    height: 100%
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+    overflow: hidden;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    position: relative;
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.layer-1,
+.layer-2,
+.layer-3 {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+}
+
+.layer-1 {
+    background-image: radial-gradient(1.5px 1.5px at var(--x1, 20%) var(--y1, 30%), var(--star), transparent);
+}
+
+.layer-2 {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: var(--stars-small);
+    animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+.layer-3 {
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: var(--stars-big);
+    animation: twinkle 6s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.moon {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #f4f1de;
+    box-shadow: 0 0 40px 8px rgba(244, 241, 222, 0.35),inset -14px -6px 0 0 rgba(20, 20, 35, 0.55);
+}
+
+.shooting-star {
+    position: absolute;
+    top: 15%;
+    left: -10%;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7);
+    animation: shoot 9s linear infinite;
+    opacity: 0;
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent);
+    transform: translateY(0.5px);
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    20% {
+        transform: translate(60vw, 30vh);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(60vw, 30vh);
+        opacity: 0;
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.quote {
+    color: var(--accent);
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    font-style: italic;
+    max-width: 700px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeIn 3s ease forwards;
+    animation-delay: 0.5s;
+    letter-spacing: 0.3px;
+}
+
+.quote span.highlight {
+    color: #ffffff;
+    font-style: normal;
+}
+
+.signature {
+    margin-top: 28px;
+    color: rgba(203, 213, 255, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 3s ease forwards;
+    animation-delay: 2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(203, 213, 255, 0.4);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 3s ease forwards;
+    animation-delay: 3s;
 }
